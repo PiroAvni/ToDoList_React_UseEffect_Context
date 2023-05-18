@@ -1,26 +1,44 @@
+import React, { useState, useContext, useRef, useEffect} from "react";
+import { TodoContext } from "../../contexts/TodoContext";
 
-function TodoForm({ inputText, setInputText, todos, setTodos, setStatus }) {
+function TodoForm() {
+  const [inputText, setInputText] = useState("");
+  const  { addTodo, filterHandler } = useContext(TodoContext);
+  const inputRef = useRef();
+
   function handleInput(e) {
     setInputText(e.target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    setTodos([
-     ...todos,
-     {text: inputText, completed: false}
-    ])
-    setInputText('')
+    addTodo(inputText);
+    setInputText("");
   }
-    
+
   function handleStatus(e) {
-    setStatus(e.target.value)
+    filterHandler(e.target.value);
   }
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   return (
     <form onSubmit={handleSubmit}>
-      <input value={inputText} type="text" className="todo-input" onChange={handleInput} />
-      <button type="submit" className="todo-button">Add</button>
+      <input
+      id="todos"
+        value={inputText}
+        type="text"
+        placeholder="Add a Task"
+        autoComplete="off"
+        className="todo-input"
+        onChange={handleInput}
+        ref={inputRef}
+      />
+      <button type="submit" className="todo-button">
+        Add
+      </button>
       <div className="select">
         <select onChange={handleStatus} name="todos" className="filter-todo">
           <option value="all">All</option>
@@ -29,7 +47,7 @@ function TodoForm({ inputText, setInputText, todos, setTodos, setStatus }) {
         </select>
       </div>
     </form>
-  )
+  );
 }
 
 export default TodoForm;

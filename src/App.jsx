@@ -1,33 +1,23 @@
-import React, {useState, useEffect} from 'react';
-import './App.css';
-import { TodoForm, TodoList } from './components';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom'
+import ProtectedRouted from './routes'
+import { AuthProvider } from './contexts'
+import { Home, Login } from './pages'
+import './App.css'
 
-function App() {
-  const [inputText, setInputText] = useState('');
-  const [todos, setTodos] = useState([]);
-  const [status, setStatus] = useState('all');
-  const [filteredTodos, setFilteredTodos] = useState([]);
-  
-  useEffect(() => {
-    filterHandler()
-  }, [status, todos])
+const App = () => {
 
-  function filterHandler() {
-    if(status === 'completed') {
-      setFilteredTodos(todos.filter(todo => todo.completed === true))
-    } else if (status === 'uncompleted') {
-      setFilteredTodos(todos.filter(todo => todo.completed === false))
-    } else {
-      setFilteredTodos(todos);
-    }
-  }
-  
   return (
-    <div>
-      <header>Sarah's Todo List</header>
-      <TodoForm inputText={inputText} setInputText={setInputText} todos={todos} setTodos={setTodos} setStatus={setStatus} />
-      <TodoList filteredTodos={filteredTodos} todos={todos} setTodos={setTodos} />
-    </div>
+    <AuthProvider>
+      <Routes>
+
+      <Route path="/" element={<ProtectedRouted redirectTo="/login"/>}>
+          <Route index element={<Home />} />
+      </Route>
+        
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </AuthProvider>
   );
 }
 

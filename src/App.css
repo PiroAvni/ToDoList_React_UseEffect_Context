@@ -15,37 +15,6 @@ header {
     font-size: 2rem;
 }
 
-header,
-form,
-.fact-box {
-    min-height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-form input,
-form button {
-    padding: 0.5rem;
-    font-size: 2rem;
-    border: none;
-    background: white;
-    border-radius: 0.5rem;
-    font-family:'Courier New', Courier, monospace;
-}
-
-form button {
-    color: palevioletred;
-    background: #f7fffe;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-left: 0.5rem;
-}
-
-form button:hover {
-    background-color: palevioletred;
-    color: white;
-}
 
 .todo-container {
     display: flex;
