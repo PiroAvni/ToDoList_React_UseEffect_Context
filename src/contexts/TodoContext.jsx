@@ -1,8 +1,13 @@
-import React, { createContext, useState } from 'react';
+import React, {
+  createContext,
+  useState, useEffect
+} from 'react';
 
 export const TodoContext = createContext();
 
-export const TodoProvider = ({ children }) => {
+export const TodoProvider = ({
+  children
+}) => {
 
   const [todos, setTodos] = useState([{
     "id": 7,
@@ -21,7 +26,7 @@ export const TodoProvider = ({ children }) => {
   const [status, setStatus] = useState('all');
   const [filteredTodos, setFilteredTodos] = useState([]);
 
-  const addTodo = (inputText) => {
+  const addTodo = (task) => {
     const newTodo = {
       id: Date.now(),
       task,
@@ -38,7 +43,10 @@ export const TodoProvider = ({ children }) => {
   const toggleTodo = (id) => {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+        todo.id === id ? {
+          ...todo,
+          completed: !todo.completed
+        } : todo
       )
     );
   };
@@ -47,8 +55,10 @@ export const TodoProvider = ({ children }) => {
     filterHandler()
   }, [status, todos])
 
- const filterHandler =(status) => {
-    if(status === 'completed') {
+
+
+  const filterHandler = (status) => {
+    if (status === 'completed') {
       setFilteredTodos(todos.filter(todo => todo.completed === true))
     } else if (status === 'uncompleted') {
       setFilteredTodos(todos.filter(todo => todo.completed === false))
@@ -57,12 +67,23 @@ export const TodoProvider = ({ children }) => {
     }
   }
 
-  console.log(todos)
-  return (
-    <TodoContext.Provider value={{  todos:filteredTodos, addTodo, deleteTodo, toggleTodo, filterHandler }}>
-      {children}
+  console.log('todos',todos)
+ console.log('filter:',filteredTodos)
+ 
+  return ( 
+  <TodoContext.Provider value = {
+      {
+        todos:filteredTodos,
+        addTodo,
+        deleteTodo,
+        toggleTodo,
+        filterHandler,
+        setStatus
+      }
+    } > {
+      children
+    } 
     </TodoContext.Provider>
   );
 };
-
-export const useAuth = () => useContext(AuthContext);
+export default TodoContext;

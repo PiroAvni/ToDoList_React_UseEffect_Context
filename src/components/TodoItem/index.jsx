@@ -1,15 +1,24 @@
-import { TodoContext } from '../../contexts/TodoContext';
+// import { TodoContext } from '../../contexts/TodoContext';
+// import { useContext } from "react";
 
-function TodoItem() {
-	const { todos, deleteTodo, toggleTodo } = useContext(TodoContext);
+// function TodoItem() {
+// 	const { todos,deleteTodo, toggleTodo, filterHandler} = useContext(TodoContext);
 
-	return(
-		<li className="todo">
-			<span className={`todo-item ${todo.completed ? 'completed' : ''}`}>{todos.text}</span>
-			<button className="trash-btn" onClick={() => deleteTodo(todos.id)}>Delete</button>
-			<button className="complete-btn" onClick={() => toggleTodo(todos.id)}>Complete</button>
-		</li>
-	)
-	}
+// // console.log('todoitem:', todos)
 
-export default TodoItem;
+	
+
+
+
+// return(
+// 		<>
+// 		<li className="todo">
+// 			<span className={`todo-item ${todos.completed ? 'completed' : ''}`}>{todos.todo}</span>
+// 			<button className="trash-btn" onClick={() => filterHandler(deleteTodo(todos.id))}>Delete</button>
+// 			<button className="complete-btn" onClick={() => filterHandler(toggleTodo(todos.id))}>Complete</button>
+// 		</li>
+// 		</>
+// 	)
+// 	}
+
+// export default TodoItem;

@@ -2,22 +2,23 @@ import React, { useState, useContext, useRef, useEffect} from "react";
 import { TodoContext } from "../../contexts/TodoContext";
 
 function TodoForm() {
-  const [inputText, setInputText] = useState("");
-  const  { addTodo, filterHandler } = useContext(TodoContext);
+  const [task, setTask] = useState("");
+  const  { addTodo, filterHandler, setStatus } = useContext(TodoContext);
   const inputRef = useRef();
 
   function handleInput(e) {
-    setInputText(e.target.value);
+    setTask(e.target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    addTodo(inputText);
-    setInputText("");
+    addTodo(task);
+    setTask("");
   }
 
   function handleStatus(e) {
     filterHandler(e.target.value);
+   
   }
 
   useEffect(() => {
@@ -28,7 +29,7 @@ function TodoForm() {
     <form onSubmit={handleSubmit}>
       <input
       id="todos"
-        value={inputText}
+        value={task}
         type="text"
         placeholder="Add a Task"
         autoComplete="off"
